@@ -1,4 +1,4 @@
-package local.mrjnk.messenger;
+package local.mrjnk.messenger.controller;
 
 import local.mrjnk.messenger.domain.Message;
 import local.mrjnk.messenger.repos.MessageRepo;
@@ -12,24 +12,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class GreetingController {
+public class MainController {
     @Autowired
     private MessageRepo messageRepo;
 
     @GetMapping("/")
     public String greeting(Model model) {
-        return "home";
+        return "hello";
     }
 
     @GetMapping("/main")
-    public String index(Model model) {
+    public String main(Model model) {
         Iterable<Message> messages = messageRepo.findAll();
         model.addAttribute("messages", messages);
-        //model.addAttribute("some","This is indexPage");
         return "main";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String add(@RequestParam String text, @RequestParam String tag, Model model) {
         Message message = new Message(text, tag);
 
