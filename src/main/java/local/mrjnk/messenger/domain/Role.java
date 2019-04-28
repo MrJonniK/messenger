@@ -1,8 +1,15 @@
 package local.mrjnk.messenger.domain;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-public enum Role {
+public enum Role implements GrantedAuthority {
     USER, ADMIN;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
