@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta  http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
-    <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out"/>
-    </form>
 
+
+<section layout:decorate="~{layouts/layout}" layout:fragment="content">
+    <div th:insert="~{fragments/logout :: logout}"></div>
+    <span><a th:href="@{/user}">User list</a></span>
     <div>
         <form method="post">
             <input type="text" name="text" placeholder="Введите сообщение" />
@@ -20,9 +12,9 @@
         </form>
     </div>
     <div>Список сообщений</div>
-    <form method="post" action="filter">
-        <input type="text" name="filter">
-        <div><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /></div>
+    <form method="get" action="/main">
+        <input type="text" name="filter" value="${filter}">
+<!--        <div><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /></div>-->
         <button type="submit">Найти</button>
     </form>
     <div th:each="message : ${messages}">
@@ -31,6 +23,4 @@
         <i th:text="${message.tag}">Tag</i>
         <strong th:text="${message.authorName}">Author</strong>
     </div>
-<!--    <div th:text="${some}" />-->
-</body>
-</html>
+</section>

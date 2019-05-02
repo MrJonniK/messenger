@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Messenger</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <!--    <script src="common-script.js"></script>-->
+</head>
+<body>
+<header>
+    <h1>Messenger Emelya</h1>
+    <h2 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h2>
+</header>
+
+<section layout:fragment="content">
+    <p>Page content goes here</p>
+</section>
+<footer>
+    <p>My footer</p>
+    <p layout:fragment="custom-footer"></p>
+</footer>
+</body>
+</html>

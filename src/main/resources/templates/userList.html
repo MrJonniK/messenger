@@ -1,0 +1,23 @@
+<section layout:decorate="~{layouts/layout}" layout:fragment="content">
+    <div>
+        <p>List of users</p>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.username}"></td>
+<!--                <td th:each="role : ${user.roles}" th:text="${role}"></td>-->
+                <td th:text="${#strings.toString(user.roles)}"></td>
+                <td><a th:href="@{/user/{userId}(userId=${user.id})}">edit</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>

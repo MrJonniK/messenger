@@ -1,24 +1,2 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<head>
-    <title>New user page</title>
-</head>
-<body>
-<div>Register page</div>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<div th:text="${message}"></div>
-<form th:action="@{/registration}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
-    <div><input type="submit" value="Sign In"/></div>
-    <div><input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /></div>
-</form>
-
-</body>
-</html>
+<section layout:insert="layouts/login :: login(path='/registration')" th:remove="tag">
+</section>

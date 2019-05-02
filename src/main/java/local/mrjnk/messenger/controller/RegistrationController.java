@@ -32,7 +32,7 @@ public class RegistrationController {
             return "login";
         }
         user.setActive(true);
-        user.setRoles(new HashSet<>(Arrays.asList(Role.ADMIN)));
+        user.setRoles(new HashSet<>(Arrays.asList(Role.USER)));
         userRepo.save(user);
 
         return "redirect:/login";
