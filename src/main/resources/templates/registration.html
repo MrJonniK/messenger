@@ -1,2 +1,7 @@
-<section layout:insert="layouts/login :: login(path='/registration')" th:remove="tag">
+<section layout:decorate="~{layouts/layout}" layout:fragment="content">
+    <p>Add new user</p>
+    <section  class="mb-1" layout:insert="fragments/login :: login(path='/registration',isRegisterForm=true)"
+             th:remove="tag"></section>
 </section>
+
+

@@ -1,0 +1,4 @@
+<div th:fragment="security" th:with="known=${#bools.isTrue(session.SPRING_SECURITY_CONTEXT)},
+     isAdmin = ${known ? session.SPRING_SECURITY_CONTEXT.authentication.principal.isAdmin() : false},
+     name    = ${known ? session.SPRING_SECURITY_CONTEXT.authentication.principal.getUsername():unknown}">
+</div>

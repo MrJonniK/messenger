@@ -1,4 +1,3 @@
-
 <section layout:decorate="~{layouts/layout}" layout:fragment="content">
-    <a th:href="@{/main}">Main page</a>
+    <h5 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h5>
 </section>
