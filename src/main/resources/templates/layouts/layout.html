@@ -12,7 +12,7 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
 </head>
-<body>
+<body th:with="appName=${@environment.getProperty('spring.application.name')}">
 <div th:insert="~{fragments/navbar :: navbar}" th:remove="tag"/>
 <div class="container mt-5">
 

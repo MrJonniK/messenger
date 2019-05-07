@@ -3,9 +3,15 @@ package local.mrjnk.messenger.controller;
 import local.mrjnk.messenger.domain.Message;
 import local.mrjnk.messenger.domain.User;
 import local.mrjnk.messenger.repos.MessageRepo;
+import local.mrjnk.messenger.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.ServletContext;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -28,7 +33,8 @@ public class MainController {
 
     @GetMapping("/")
     public String greeting(Model model) {
-        return "hello";
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication instanceof AnonymousAuthenticationToken ? "hello" : "redirect:/main";
     }
 
     @GetMapping("/main")

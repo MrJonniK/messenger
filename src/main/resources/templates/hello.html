@@ -1,3 +1,15 @@
 <section layout:decorate="~{layouts/layout}" layout:fragment="content">
-    <h5 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h5>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="blockquote">
+                <h5 th:inline="text" th:text="'Hello, this is '+${appName}+' messenger!'"></h5>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div>
+                <a class="btn btn-primary" href="/login" role="button">Login</a>
+                <a class="btn btn-primary" href="/registration" role="button">Register</a>
+            </div>
+        </div>
+    </div>
 </section>

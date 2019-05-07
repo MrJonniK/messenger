@@ -48,7 +48,6 @@ public class UserController {
             if (roles.contains(key)) {
                 user.getRoles().add(Role.valueOf(key));
             }
-
         }
         userRepo.save(user);
         return "redirect:/user";
