@@ -12,7 +12,7 @@ Messenger uses a number of open source projects to work properly:
 
 ### Getting Started:
   - Create database in PostgreSQL
-  - Edit "application.properties" file. Setup database connection, email send and other options.
+  - Edit "resources/application.properties" file and change database connection options.
   - Verify the deployment by navigating to your server address in your preferred browser.
   ```sh
   http://localhost/
