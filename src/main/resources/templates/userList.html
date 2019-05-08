@@ -12,9 +12,18 @@
             <tbody>
             <tr th:each="user : ${users}">
                 <td th:text="${user.username}"></td>
-<!--                <td th:each="role : ${user.roles}" th:text="${role}"></td>-->
+                <!--                <td th:each="role : ${user.roles}" th:text="${role}"></td>-->
                 <td th:text="${#strings.toString(user.roles)}"></td>
-                <td><a th:href="@{/user/{userId}(userId=${user.id})}">edit</a></td>
+                <td>
+                    <form th:action="@{/user/{userId}(userId=${user.id})}">
+                        <button class="btn btn-primary" type="submit" th:text="Edit"></button>
+                    </form>
+                </td>
+                <td>
+                    <form method="get" th:action="@{/user/{userId}/delete(userId=${user.id})}">
+                        <button class="btn btn-primary" type="submit" th:text="Delete"></button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>

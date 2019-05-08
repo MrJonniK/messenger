@@ -3,6 +3,7 @@ package local.mrjnk.messenger.controller;
 import local.mrjnk.messenger.domain.User;
 import local.mrjnk.messenger.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,9 @@ public class RegistrationController {
 
     @Autowired
     private UserService userService;
+
+    @Value("${application.use-email-registration}")
+    boolean useEmail;
 
     @GetMapping("/registration")
     public String registration() {
@@ -33,11 +37,13 @@ public class RegistrationController {
 
     @GetMapping("/activate/{code}")
     public String activate(@PathVariable String code, Model model) {
-        boolean isActivated = userService.activateUser(code);
-        if (isActivated) {
-            model.addAttribute("message", "User successfully activated");
-        } else {
-            model.addAttribute("message", "Activation code is fault");
+        if (useEmail) {
+            boolean isActivated = userService.activateUser(code);
+            if (isActivated) {
+                model.addAttribute("message", "User successfully activated");
+            } else {
+                model.addAttribute("message", "Activation code is fault");
+            }
         }
         return "login";
     }

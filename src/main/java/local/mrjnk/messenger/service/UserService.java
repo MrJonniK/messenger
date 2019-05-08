@@ -18,10 +18,14 @@ import java.util.UUID;
 @Service
 public class UserService implements UserDetailsService {
 
-    private final UserRepo userRepo;
+    @Autowired
+    private UserRepo userRepo;
 
     @Autowired
     private EMailSender EMailSender;
+
+    @Value("${application.use-email-registration}")
+    boolean useEmail;
 
     @Value("${spring.application.name}")
     private String appName;
@@ -42,7 +46,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
-        user.setActive(false);
+        user.setActive(!useEmail);
         Role grantedRole = Role.USER;
         if (userRepo.findAll().isEmpty())
             grantedRole = Role.ADMIN;
@@ -50,7 +54,7 @@ public class UserService implements UserDetailsService {
         user.setActivationCode(UUID.randomUUID().toString());
         userRepo.save(user);
 
-        if (!StringUtils.isEmpty(user.getEmail())) {
+        if (useEmail && !StringUtils.isEmpty(user.getEmail())) {
             String message = String.format(
                     "Hello, %s! \n"+
                             "Welcome to "+appName+"\n"+
@@ -75,5 +79,9 @@ public class UserService implements UserDetailsService {
         userRepo.save(user);
 
         return true;
+    }
+
+    public void delUser(User user) {
+       userRepo.delete(user);
     }
 }
