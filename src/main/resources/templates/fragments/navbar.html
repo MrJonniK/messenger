@@ -24,8 +24,13 @@
                 <li class="nav-item" th:if="${isAdmin}">
                     <a class="nav-link" href="/user">User list</a>
                 </li>
+                <li class="nav-item" th:if="${known}">
+                    <a class="nav-link" href="/user/profile">Profile</a>
+                </li>
             </ul>
-            <div class="navbar-text mr-3" th:if="${known}" th:text="${name}"></div>
+            <div class="navbar-text mr-3" th:if="${known}" >
+                <a class="nav-link" href="/user/profile" th:text="${name}"></a>
+            </div>
             <div th:if="${known}" th:insert="~{fragments/login :: logout}"></div>
         </div>
     </nav>
